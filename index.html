@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>XRD Facility — Slot Booking</title>
+  <meta name="description" content="Book X-ray Diffraction (XRD) analysis slots at the central research facility.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- HEADER: text below is overwritten by CONFIG in script.js (edit CONFIG, not here) -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img id="logo" class="logo" alt="Institute logo" hidden>
+        <div id="logoFallback" class="logo-fallback" aria-hidden="true">XRD</div>
+        <div>
+          <h1 id="instituteName">Institute Name</h1>
+          <p id="departmentName" class="dept">Department Name</p>
+          <p id="facilityName" class="facility">XRD Facility</p>
+        </div>
+      </div>
+      <span class="status-pill"><span class="dot"></span>Instrument Status: Online / Active</span>
+    </div>
+  </header>
+
+  <div class="ticker" role="region" aria-label="Announcements">
+    <span class="ticker-label">NOTICE</span>
+    <div class="ticker-viewport">
+      <div class="ticker-track">
+        <span id="tickerText"></span>
+        <span id="tickerText2" aria-hidden="true"></span>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <section aria-labelledby="availHeading">
+      <div class="section-head">
+        <div>
+          <h2 id="availHeading">Slot Availability</h2>
+          <p class="muted">One session per week · maximum 24 samples per session</p>
+        </div>
+        <div class="refresh">
+          <span id="lastUpdated" class="muted">Last updated: —</span>
+          <button id="refreshBtn" class="btn secondary" type="button">↻ Refresh Availability</button>
+        </div>
+      </div>
+      <p id="demoNote" class="demo-note" hidden>Demo mode: showing sample data (Google Sheet not configured or unreachable).</p>
+      <div class="cards">
+        <article id="card1" class="card session"></article>
+        <article id="card2" class="card session"></article>
+      </div>
+      <div class="legend">
+        <span><i class="cell"></i> Available</span>
+        <span><i class="cell booked"></i> Booked</span>
+      </div>
+    </section>
+
+    <section aria-labelledby="specHeading">
+      <h2 id="specHeading">Instrument Specifications</h2>
+      <div class="card specs">
+        <table>
+          <tbody>
+            <tr><th scope="row">X-ray Source</th><td>Cu K-alpha, λ = 1.5406 Å</td></tr>
+            <tr><th scope="row">Geometry</th><td>Bragg-Brentano / Parallel Beam</td></tr>
+            <tr><th scope="row">Standard 2-Theta Range</th><td>10° – 90° (extendable on request, e.g. 5° – 120°)</td></tr>
+            <tr><th scope="row">Powder Sample</th><td>Finely ground, ≤ 45 µm (325 mesh); minimum ~200 mg</td></tr>
+            <tr><th scope="row">Sample Dimensions</th><td>Pellet / thin film / bulk: flat surface, up to 20 mm × 20 mm, thickness ≤ 3 mm</td></tr>
+          </tbody>
+        </table>
+        <p class="muted small">Please enter these parameters (scan range, step size, scan speed) accurately in the booking form. Values are indicative — edit in <code>index.html</code> to match your instrument.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="faqHeading">
+      <h2 id="faqHeading">Submission Guidelines &amp; FAQ</h2>
+      <div class="faq">
+        <details open>
+          <summary>Sample Labeling Format</summary>
+          <p>Label each sample holder/vial as <strong>SupervisorInitials_UserName_SampleNo</strong> (e.g. <code>AK_Ravi_03</code>). The label must match the name entered in the booking form exactly.</p>
+        </details>
+        <details>
+          <summary>Physical Drop-off Deadlines</summary>
+          <p>Samples must be physically submitted at the facility before the deadline announced in the ticker (typically Tuesday 4:00 PM before the session). Late samples roll over to the next available session.</p>
+        </details>
+        <details>
+          <summary>Maximum Samples per User</summary>
+          <p>Each user may book a limited number of samples per session so that all 24 slots are shared fairly. Check the booking form for the current per-user limit.</p>
+        </details>
+        <details>
+          <summary>Raw Data Delivery</summary>
+          <p>Raw data files (.raw / .xy / .csv) are emailed to the address provided in the booking form, normally within 2–3 working days after the session. Please keep a copy of your booking confirmation.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">&copy; <span id="year"></span> Central XRD Facility. For queries, contact the facility in-charge.</div>
+  </footer>
+
+  <!-- PRE-BOOKING MODAL -->
+  <div id="modal" class="modal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h3 id="modalTitle">Before you book</h3>
+      <p class="muted">Please confirm all three items to continue to the booking form.</p>
+      <label class="check"><input type="checkbox" class="confirm-check"> <span>My sample meets the dimension / powder fineness requirements (≤ 45 µm powder; flat solids within size limits).</span></label>
+      <label class="check"><input type="checkbox" class="confirm-check"> <span>My sample is safe: non-corrosive, non-toxic, non-radioactive and non-volatile.</span></label>
+      <label class="check"><input type="checkbox" class="confirm-check"> <span>I agree to physically drop off my sample before the stated deadline.</span></label>
+      <div class="modal-actions">
+        <button id="cancelBtn" class="btn secondary" type="button">Cancel</button>
+        <button id="proceedBtn" class="btn" type="button" disabled>Proceed to Booking Form</button>
+      </div>
+    </div>
+  </div>
+
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  <script src="script.js"></script>
+</body>
+</html>
