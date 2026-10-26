@@ -16,7 +16,7 @@ const CONFIG = {
   // PASTE your published Google Sheet CSV URL between the quotes
   // (File > Share > Publish to web > Comma-separated values (.csv)).
   // Leave "" to run in offline demo mode using MOCK_DATA below.
-  GOOGLE_SHEET_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQNnkSEHKFiwaii9gd1BMZNwAmzBmobcSI4fNG5BMaCGGLJxMfvLTNTvtQUWts3MwxLDDs0o93nEb5i/pubhtml",
+  GOOGLE_SHEET_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQNnkSEHKFiwaii9gd1BMZNwAmzBmobcSI4fNG5BMaCGGLJxMfvLTNTvtQUWts3MwxLDDs0o93nEb5i/pub?gid=0&single=true&output=csv",
 
   // Hard limit of samples per weekly session
   MAX_SAMPLES_PER_WEEK: 24,
