@@ -28,7 +28,7 @@
   </header>
 
   <div class="ticker" role="region" aria-label="Announcements">
-    <span class="ticker-label">NOTICE</span>
+    <span class="ticker-label">Announcements</span>
     <div class="ticker-viewport">
       <div class="ticker-track">
         <span id="tickerText"></span>
@@ -49,7 +49,7 @@
           <button id="refreshBtn" class="btn secondary" type="button">↻ Refresh Availability</button>
         </div>
       </div>
-      <p id="demoNote" class="demo-note" hidden>Demo mode: showing sample data (Google Sheet not configured or unreachable).</p>
+      <p id="demoNote" class="demo-note" hidden>Server unreachable</p>
       <div class="cards">
         <article id="card1" class="card session"></article>
         <article id="card2" class="card session"></article>
@@ -65,14 +65,24 @@
       <div class="card specs">
         <table>
           <tbody>
+            <tr><th scope="row">XRD Make / Model</th><td>Rigaku Ultima IV</td></tr>
             <tr><th scope="row">X-ray Source</th><td>Cu K-alpha, λ = 1.5406 Å</td></tr>
-            <tr><th scope="row">Geometry</th><td>Bragg-Brentano / Parallel Beam</td></tr>
-            <tr><th scope="row">Standard 2-Theta Range</th><td>10° – 90° (extendable on request, e.g. 5° – 120°)</td></tr>
-            <tr><th scope="row">Powder Sample</th><td>Finely ground, ≤ 45 µm (325 mesh); minimum ~200 mg</td></tr>
-            <tr><th scope="row">Sample Dimensions</th><td>Pellet / thin film / bulk: flat surface, up to 20 mm × 20 mm, thickness ≤ 3 mm</td></tr>
+            <tr><th scope="row">Geometry</th><td>Bragg-Brentano</td></tr>
+            <tr><th scope="row">Standard 2-Theta Range</th><td>5° – 90°</td></tr>
           </tbody>
         </table>
-        <p class="muted small">Please enter these parameters (scan range, step size, scan speed) accurately in the booking form. Values are indicative — edit in <code>index.html</code> to match your instrument.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="specHeading">
+      <h2 id="specHeading">Sample Guidelines</h2>
+      <div class="card specs">
+        <table>
+          <tbody>
+            <tr><th scope="row">Powder Sample</th><td>Finely ground, ≤ 50 µm ; minimum powder volume ~1.5 ml</td></tr>
+            <tr><th scope="row">Solid Sample Dimensions</th><td>Pellet / bulk: flat surface, up to 20 mm × 20 mm, thickness ≤ 5 mm</td></tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
@@ -81,26 +91,26 @@
       <div class="faq">
         <details open>
           <summary>Sample Labeling Format</summary>
-          <p>Label each sample holder/vial as <strong>SupervisorInitials_UserName_SampleNo</strong> (e.g. <code>AK_Ravi_03</code>). The label must match the name entered in the booking form exactly.</p>
+          <p>Label each sample and submit in a ziplock pouch with <strong>Applicant Name</strong>, the label must match the name entered in the booking form exactly.</p>
         </details>
         <details>
           <summary>Physical Drop-off Deadlines</summary>
-          <p>Samples must be physically submitted at the facility before the deadline announced in the ticker (typically Tuesday 4:00 PM before the session). Late samples roll over to the next available session.</p>
+          <p>Samples must be physically submitted at the facility before the deadline mentioned in the e-mail. Late samples roll over to the next available session.</p>
         </details>
         <details>
           <summary>Maximum Samples per User</summary>
-          <p>Each user may book a limited number of samples per session so that all 24 slots are shared fairly. Check the booking form for the current per-user limit.</p>
+          <p>Each user may book a limited number of samples per session so that all 24 slots are shared fairly.</p>
         </details>
         <details>
           <summary>Raw Data Delivery</summary>
-          <p>Raw data files (.raw / .xy / .csv) are emailed to the address provided in the booking form, normally within 2–3 working days after the session. Please keep a copy of your booking confirmation.</p>
+          <p>Raw data files (.raw / .txt) are emailed to the address provided in the booking form, normally within 1–2 working days after the session. Please keep a copy of your booking confirmation.</p>
         </details>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">&copy; <span id="year"></span> Central XRD Facility. For queries, contact the facility in-charge.</div>
+    <div class="container">&copy; <span id="year"></span> Team XRD. Website forged with 🔥 in Meta.</div>
   </footer>
 
   <!-- PRE-BOOKING MODAL -->
@@ -108,9 +118,9 @@
     <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <h3 id="modalTitle">Before you book</h3>
       <p class="muted">Please confirm all three items to continue to the booking form.</p>
-      <label class="check"><input type="checkbox" class="confirm-check"> <span>My sample meets the dimension / powder fineness requirements (≤ 45 µm powder; flat solids within size limits).</span></label>
+      <label class="check"><input type="checkbox" class="confirm-check"> <span>My sample meets the dimension / powder fineness requirements (≤ 50 µm powder; flat solids within size limits).</span></label>
       <label class="check"><input type="checkbox" class="confirm-check"> <span>My sample is safe: non-corrosive, non-toxic, non-radioactive and non-volatile.</span></label>
-      <label class="check"><input type="checkbox" class="confirm-check"> <span>I agree to physically drop off my sample before the stated deadline.</span></label>
+      <label class="check"><input type="checkbox" class="confirm-check"> <span>I agree to physically drop off my sample before the stated deadline once my booking got confirmed.</span></label>
       <div class="modal-actions">
         <button id="cancelBtn" class="btn secondary" type="button">Cancel</button>
         <button id="proceedBtn" class="btn" type="button" disabled>Proceed to Booking Form</button>
