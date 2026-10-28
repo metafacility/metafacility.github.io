@@ -8,7 +8,7 @@ const CONFIG = {
   FACILITY_NAME: "X-Ray Diffraction (XRD) Facility",
 
   // Local path (e.g. "./assets/logo.png") or full external URL. Leave "" for a placeholder.
-  LOGO_URL: "",
+  LOGO_URL: "./main/Low-Resolution-Emblem.png",
 
   // PASTE your Microsoft Form URL between the quotes:
   MS_FORM_URL: "https://forms.cloud.microsoft/r/mZ85Nq4fhz",
