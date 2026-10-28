@@ -26,22 +26,22 @@ const CONFIG = {
 
   // Shown in the ticker when the sheet has no Alert_Message
   FALLBACK_ALERT_TEXT:
-    "Welcome to the Central XRD Facility. Sessions run once a week — please submit samples before the drop-off deadline.",
+    "Welcome to the Central XRD Facility.",
 
   // Mock/fallback data used if the sheet URL is empty or fails to load
   MOCK_DATA: [
     {
       "Week_Label": "Week 1",
-      "Session_Date": "2026-11-04",
-      "Samples_Booked": 18,
-      "Status_Override": "Open",
-      "Alert_Message": "Facility operating normally. Submit samples by Tuesday 4:00 PM."
+      "Session_Date": "Unavailable",
+      "Samples_Booked": 24,
+      "Status_Override": "Error",
+      "Alert_Message": "Error contact web team"
     },
     {
       "Week_Label": "Week 2",
-      "Session_Date": "2026-11-11",
-      "Samples_Booked": 6,
-      "Status_Override": "Open",
+      "Session_Date": "Unavailable",
+      "Samples_Booked": 24,
+      "Status_Override": "Error",
       "Alert_Message": ""
     }
   ],
@@ -188,7 +188,7 @@ function renderCard(el, data, title) {
     </div>
     <p class="date">📅 ${esc(formatDate(data.Session_Date))}</p>
     <dl class="metrics">
-      <div><dt>Total Capacity</dt><dd>${max}</dd></div>
+      <div><dt>Total Slots</dt><dd>${max}</dd></div>
       <div><dt>Samples Booked</dt><dd>${booked}</dd></div>
       <div><dt>Remaining Slots</dt><dd>${remaining}</dd></div>
     </dl>
