@@ -18,6 +18,7 @@ code { background: #eef2f7; padding: 1px 6px; border-radius: 4px; font-size: .9e
 .brand { display: flex; gap: 16px; align-items: center; }
 .logo { width: 64px; height: 64px; object-fit: contain; background: #fff; border-radius: 10px; padding: 4px; }
 .logo-fallback { width: 64px; height: 64px; border-radius: 10px; background: var(--gold); display: grid; place-items: center; font-weight: 800; }
+.logo-fallback[hidden] { display: none !important; }
 .site-header h1 { font-size: 1.5rem; }
 .dept { margin: 2px 0 0; color: #cbd5e1; }
 .facility { margin: 2px 0 0; color: #fbbf24; font-weight: 600; }
