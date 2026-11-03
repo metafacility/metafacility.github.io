@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Security: restricts which domains the page may load scripts, styles, frames and data from -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Contact Us — XRD Facility</title>
+  <meta name="description" content="Contact details of the XRD facility in-charge and operator.">
+  <meta name="theme-color" content="#0f172a">
+  <!-- Social sharing preview (replace og:image with a full https:// URL after deployment) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Contact Us — XRD Facility">
+  <meta property="og:description" content="Contact details of the XRD facility in-charge and operator.">
+  <meta property="og:image" content="assets/img/logo.png">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <!-- Fonts: only the weights used on the site -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- HEADER + NAV: keep identical on every page (edit institute text here) -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img class="logo" src="assets/img/logo.png" width="64" height="64" alt="Institute logo">
+        <div>
+          <h1>National Institute of Technology Tiruchirappalli</h1>
+          <p class="dept">Department of Metallurgical and Materials Engineering</p>
+          <p class="facility">X-Ray Diffraction (XRD) Facility</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" aria-label="Main">
+    <div class="container nav-inner">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks">☰ Menu</button>
+      <ul id="navLinks" class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="instrument.html">Instrument Specifications</a></li>
+        <li><a href="charges.html">Usage Charges</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="results.html">Results &amp; Receipts</a></li>
+        <li><a href="contact.html" aria-current="page">Contact Us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    <div class="page-title">
+      <h2>Contact Us</h2>
+      <p>Questions about bookings, training, or instrumentation? please feel free to reach out.</p>
+    </div>
+
+    <div class="card specs">
+      <h3>Facility Contact</h3>
+      <table><tbody>
+        <tr><th scope="row">Address</th><td>XRD Facility, OJAS building, NIT Tiruchirappalli, Tiruchirappalli – 620 015</td></tr>
+        <tr><th scope="row">E-mail</th><td><a href="mailto:nittxrd@gmail.com">nittxrd@gmail.com</a></td></tr>
+        <tr><th scope="row">Phone</th><td><a href="tel:04312503450">0431 250 3450</a></td></tr>
+        <tr><th scope="row">Working Hours</th><td>Monday – Friday, 8:30 AM – 5:15 PM</td></tr>
+      </tbody></table>
+    </div>
+
+    <h2 class="mt-36">Our Team</h2>
+    <div class="people">
+      <!-- Replace the img src with real photos,       keep the file names photo1.jpg / photo2.jpg in assets/img/ (square photos work best) -->
+      <article class="card person">
+        <img src="assets/img/photo1.jpg" width="160" height="160" loading="lazy" alt="Photo of the facility in-charge">
+        <h3>Dr. S. JEROME</h3>
+        <p class="role">Facility In-charge</p>
+        <p>Associate Professor, Dept of MME</p>
+        <p><a href="mailto:jerome@nitt.edu">jerome@nitt.edu</a></p>
+        <p><a href="tel:04312503465">0431 250 3465</a></p>
+      </article>
+      <article class="card person">
+        <img src="assets/img/photo2.jpg" width="160" height="160" loading="lazy" alt="Photo of the instrument operator">
+        <h3>Mr. AZHAGAPPAN KR</h3>
+        <p class="role">Instrument Operator</p>
+        <p>Technician SG II, Dept of MME</p>
+        <p><a href="mailto:azhagappan@nitt.edu">azhagappan@nitt.edu</a></p>
+        <p><a href="tel:04312503450">0431 250 3450</a></p>
+      </article>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">&copy; <span id="year"></span> Designed & Forged in 🔥 by Team META.</div>
+  </footer>
+  <script src="js/nav.js" defer></script>
+</body>
+</html>

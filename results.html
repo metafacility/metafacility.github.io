@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Security: restricts which domains the page may load scripts, styles, frames and data from -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src https://forms.office.com https://forms.cloud.microsoft; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Results &amp; Receipts — XRD Facility</title>
+  <meta name="description" content="Submit payment receipts and retrieve results.">
+  <meta name="theme-color" content="#0f172a">
+  <!-- Social sharing preview (replace og:image with a full https:// URL after deployment) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Results &amp; Receipts — XRD Facility">
+  <meta property="og:description" content="Submit payment receipts and retrieve results.">
+  <meta property="og:image" content="assets/img/logo.png">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <!-- Fonts: only the weights used on the site -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- HEADER + NAV: keep identical on every page (edit institute text here) -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img class="logo" src="assets/img/logo.png" width="64" height="64" alt="Institute logo">
+        <div>
+          <h1>National Institute of Technology Tiruchirappalli</h1>
+          <p class="dept">Department of Metallurgical and Materials Engineering</p>
+          <p class="facility">X-Ray Diffraction (XRD) Facility</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" aria-label="Main">
+    <div class="container nav-inner">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks">☰ Menu</button>
+      <ul id="navLinks" class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="instrument.html">Instrument Specifications</a></li>
+        <li><a href="charges.html">Usage Charges</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="results.html" aria-current="page">Results &amp; Receipts</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+       <div class="page-title">
+      <h2>Results &amp; Receipts</h2>
+      <p>Follow the procedure below to receive your results.</p>
+    </div>
+
+    <!-- PROCEDURE: 4 steps the user must follow -->
+    <section class="card steps-card" aria-labelledby="stepsHeading">
+      <ol class="steps">
+        <li>
+          <strong>Pay the XRD charges</strong>
+          <p>Pay the usage charges to the institute account.</p>
+          <a class="btn secondary" href="charges.html#payment">View institute account details →</a>
+        </li>
+        <li>
+          <strong>Upload the payment screenshot</strong>
+          <p>Upload the screenshot of your payment, showing the <b>transaction reference number</b>, to our OneDrive folder.</p>
+          <a class="btn" href="https://nitturl-my.sharepoint.com/:f:/g/personal/azhagappan_nitt_edu/IgCjslqXygepTZ8LbLfc4RPRAbyJ5yFpFSvl2lmyi-E6l1M" target="_blank" rel="noopener noreferrer">Upload screenshot to OneDrive ↗</a>
+        </li>
+        <li>
+          <strong>Fill in the transaction details</strong>
+          <p>Complete the Microsoft Form below with your transaction details.</p>
+          <a class="btn secondary" href="#txnForm">Go to the form ↓</a>
+        </li>
+        <li>
+          <strong>Receive your results by e-mail</strong>
+          <p>After the operator verifies your payment, the results will be e-mailed to the webmail ID used to book the XRD slot within one working day.</p>
+        </li>
+      </ol>
+      <p class="notice">⏳ Didn't receive your results within one working day? Contact the instrument operator at <b>azhagappan@nitt.edu</b>.</p>
+    </section>
+
+    <!-- STEP 3 FORM: Microsoft Form for transaction details -->
+    <div class="card embed" id="txnForm">
+      <h3>Fill in the transaction details</h3>
+      <!-- Replace the src below with your Microsoft Form's embed URL (Share > Embed) -->
+      <iframe src="<iframe width="640px" height="480px" src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=p1CEoozbM0yRKkQzEbIt24HXgw1mc2dHkZ3KvmFTnWJUQzRLRjNVOTdNMzNFUEhDMjIwOTBKN0MyMy4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>"
+              title="Transaction details form" loading="lazy"
+              sandbox="allow-scripts allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+              referrerpolicy="no-referrer"></iframe>
+      <p class="muted small">Form not loading? <a href="https://forms.cloud.microsoft/r/tu2kG27AsG" target="_blank" rel="noopener noreferrer">Open it in a new tab</a>.</p>
+    </div> 
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">&copy; <span id="year"></span> Designed & Forged in 🔥 by Team META.</div>
+  </footer>
+  <script src="js/nav.js" defer></script>
+</body>
+</html>

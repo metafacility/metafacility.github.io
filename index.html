@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Security: restricts which domains the page may load scripts, styles, frames and data from -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://docs.google.com; connect-src https://docs.google.com https://*.googleusercontent.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>XRD Facility — Slot Booking</title>
+  <meta name="description" content="Book X-ray Diffraction (XRD) analysis slots at the central research facility.">
+  <meta name="theme-color" content="#0f172a">
+  <!-- Social sharing preview (replace og:image with a full https:// URL after deployment) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="XRD Facility — Slot Booking">
+  <meta property="og:description" content="Book X-ray Diffraction (XRD) analysis slots at the central research facility.">
+  <meta property="og:image" content="assets/img/logo.png">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <!-- Fonts: only the weights used on the site -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- HEADER: logo, institute name and facility title (edit directly here; status badge is filled from the Google Sheet) -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img class="logo" src="assets/img/logo.png" width="64" height="64" alt="Institute logo">
+        <div>
+          <h1>National Institute of Technology Tiruchirappalli</h1>
+          <p class="dept">Department of Metallurgical and Materials Engineering</p>
+          <p class="facility">X-Ray Diffraction (XRD) Facility</p>
+        </div>
+      </div>
+      <span id="statusPill" class="status-pill"><span class="dot"></span>Instrument Status: <span id="statusText">Loading…</span></span>
+    </div>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" aria-label="Main">
+    <div class="container nav-inner">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks">☰ Menu</button>
+      <ul id="navLinks" class="nav-links">
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="instrument.html">Instrument Specifications</a></li>
+        <li><a href="charges.html">Usage Charges</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="results.html">Results &amp; Receipts</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ANNOUNCEMENT TICKER: text comes from the Alert_Message column (the 2nd span is a copy for a seamless loop) -->
+  <div class="ticker" role="region" aria-label="Announcements">
+    <span class="ticker-label">Announcements📢</span>
+    <div class="ticker-viewport">
+      <div class="ticker-track">
+        <span id="tickerText"></span>
+        <span id="tickerText2" aria-hidden="true"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    <!-- SLOT AVAILABILITY: the two cards are filled in by js/script.js -->
+    <section aria-labelledby="availHeading">
+      <div class="section-head">
+        <div>
+          <h2 id="availHeading">Slot Availability</h2>
+          <p class="muted">One session per week · maximum 24 samples per session</p>
+        </div>
+        <div class="refresh">
+          <span id="lastUpdated" class="muted">Last updated: —</span>
+          <button id="refreshBtn" class="btn secondary" type="button">↻ Refresh Availability</button>
+        </div>
+      </div>
+      <p id="demoNote" class="demo-note" hidden>Server unreachable</p>
+      <div class="cards">
+        <article id="card1" class="card session"></article>
+        <article id="card2" class="card session"></article>
+      </div>
+      <div class="legend">
+        <span><i class="cell"></i> Available</span>
+        <span><i class="cell booked"></i> Booked</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">&copy; <span id="year"></span> Designed & Forged in 🔥 by Team META.</div>
+  </footer>
+
+  <!-- PRE-BOOKING MODAL -->
+  <div id="modal" class="modal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h3 id="modalTitle">Before you book</h3>
+      <p class="muted">Please confirm all three items to continue to the booking form.</p>
+      <label class="check"><input type="checkbox" class="confirm-check"> <span>My sample meets the dimension / powder fineness requirements (≤ 50 µm powder; flat solids within size limits).</span></label>
+      <label class="check"><input type="checkbox" class="confirm-check"> <span>My sample is safe: non-corrosive, non-toxic, non-radioactive and non-volatile.</span></label>
+      <label class="check"><input type="checkbox" class="confirm-check"> <span>I agree to physically drop off my sample before the stated deadline once my booking got confirmed.</span></label>
+      <div class="modal-actions">
+        <button id="cancelBtn" class="btn secondary" type="button">Cancel</button>
+        <button id="proceedBtn" class="btn" type="button" disabled>Proceed to Booking Form</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/nav.js" defer></script>
+  <script src="js/script.js" defer></script>
+</body>
+</html>

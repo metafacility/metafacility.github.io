@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Security: restricts which domains the page may load scripts, styles, frames and data from -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>FAQ — XRD Facility</title>
+  <meta name="description" content="Frequently asked questions: sample preparation, data delivery and software.">
+  <meta name="theme-color" content="#0f172a">
+  <!-- Social sharing preview (replace og:image with a full https:// URL after deployment) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FAQ — XRD Facility">
+  <meta property="og:description" content="Frequently asked questions: sample preparation, data delivery and software.">
+  <meta property="og:image" content="assets/img/logo.png">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <!-- Fonts: only the weights used on the site -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- HEADER + NAV: keep identical on every page (edit institute text here) -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img class="logo" src="assets/img/logo.png" width="64" height="64" alt="Institute logo">
+        <div>
+          <h1>National Institute of Technology Tiruchirappalli</h1>
+          <p class="dept">Department of Metallurgical and Materials Engineering</p>
+          <p class="facility">X-Ray Diffraction (XRD) Facility</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" aria-label="Main">
+    <div class="container nav-inner">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks">☰ Menu</button>
+      <ul id="navLinks" class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="instrument.html">Instrument Specifications</a></li>
+        <li><a href="charges.html">Usage Charges</a></li>
+        <li><a href="faq.html" aria-current="page">FAQ</a></li>
+        <li><a href="results.html">Results &amp; Receipts</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    <div class="page-title">
+      <h2>Frequently Asked Questions</h2>
+      <p>Sample preparation, submission and data delivery</p>
+    </div>
+
+    <div class="faq">
+      <h3 class="faq-group">Sample Preparation Guidelines</h3>
+      <details open>
+        <summary>How should powder samples be prepared?</summary>
+        <p>Grind the sample to a fine powder (≤ 50 µm) and submit a minimum volume of about 1.5 ml. Coarse or uneven particles cause preferred orientation and poor peak intensities.</p>
+      </details>
+      <details>
+        <summary>What are the requirements for solid samples and films?</summary>
+        <p>The surface must be flat and well polished, up to 20 mm × 20 mm with thickness ≤ 5 mm.</p>
+      </details>
+      <details>
+        <summary>How should I label and pack my samples?</summary>
+        <p>Pack each sample in a ziplock pouch labelled with the <strong>Applicant Name</strong> exactly as entered in the booking form.</p>
+      </details>
+      <details>
+        <summary>Which samples are not accepted?</summary>
+        <p>Corrosive, toxic, radioactive, volatile or hygroscopic-unsealed materials are not accepted.</p>
+      </details>
+      <details>
+        <summary>When and where do I drop off samples?</summary>
+        <p>Submit samples physically at the facility before the deadline mentioned in the confirmation e-mail. Late samples roll over to the next session.</p>
+      </details>
+      <details>
+        <summary>How many samples can I book?</summary>
+        <p>Each session is capped at 24 samples, so a per-user limit applies to keep slots fair for everyone.</p>
+      </details>
+
+      <h3 class="faq-group">Data Delivery</h3>
+      <details>
+        <summary>In what format will I receive my data?</summary>
+        <p>Raw data is supplied as <code>.raw</code> and <code>.txt</code> (2θ vs. intensity) files.</p>
+      </details>
+      <details>
+        <summary>How long does data delivery take?</summary>
+        <p>Data is e-mailed to the address given in the booking form, normally within 1–2 working days after the session.</p>
+      </details>
+
+      <h3 class="faq-group">Software Resources</h3>
+      <details>
+        <summary>Which software can I use to analyse my data?</summary>
+        <ul>
+          <li><strong>Origin / Excel</strong> — plotting the .txt data.</li>
+          <li><strong>VESTA</strong> — visualising crystal structures.</li>
+          <li><strong>Match! / HighScore / Profex</strong> — phase identification.</li>
+          <li><strong>FullProf / GSAS-II</strong> — Rietveld refinement.</li>
+        </ul>
+      </details>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">&copy; <span id="year"></span> Designed & Forged in 🔥 by Team META.</div>
+  </footer>
+  <script src="js/nav.js" defer></script>
+</body>
+</html>

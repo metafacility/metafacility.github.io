@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Security: restricts which domains the page may load scripts, styles, frames and data from -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Instrument Specifications — XRD Facility</title>
+  <meta name="description" content="Specifications of the Rigaku Ultima IV X-ray diffractometer and sample requirements.">
+  <meta name="theme-color" content="#0f172a">
+  <!-- Social sharing preview (replace og:image with a full https:// URL after deployment) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Instrument Specifications — XRD Facility">
+  <meta property="og:description" content="Specifications of the Rigaku Ultima IV X-ray diffractometer and sample requirements.">
+  <meta property="og:image" content="assets/img/logo.png">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <!-- Fonts: only the weights used on the site -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/viewer.css">
+</head>
+<body>
+  <!-- HEADER + NAV: keep identical on every page (edit institute text here) -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img class="logo" src="assets/img/logo.png" width="64" height="64" alt="Institute logo">
+        <div>
+          <h1>National Institute of Technology Tiruchirappalli</h1>
+          <p class="dept">Department of Metallurgical and Materials Engineering</p>
+          <p class="facility">X-Ray Diffraction (XRD) Facility</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" aria-label="Main">
+    <div class="container nav-inner">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks">☰ Menu</button>
+      <ul id="navLinks" class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="instrument.html" aria-current="page">Instrument Specifications</a></li>
+        <li><a href="charges.html">Usage Charges</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="results.html">Results &amp; Receipts</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    <div class="page-title">
+      <h2>Instrument Specifications</h2>
+      <p>Rigaku Ultima IV X-ray diffractometer</p>
+    </div>
+
+    <!-- INTERACTIVE VIEWER: images, dots and popup text are defined in js/viewer.js -->
+    <section class="viewer" id="viewer" aria-label="Interactive 3D view of the Rigaku Ultima IV">
+      <div class="v-stage">
+        <div class="v-rig"></div>
+        <div class="v-tip" role="status" aria-live="polite"></div>
+        <span class="v-hint">⟷ Drag to open · hover or tap dots</span>
+      </div>
+      <div class="v-controls">
+        <button class="v-btn active" data-t="0" type="button">Closed</button>
+        <button class="v-btn" data-t="0.5" type="button">Doors Open</button>
+        <button class="v-btn" data-t="1" type="button">Close-up</button>
+        <button class="v-btn" id="vDots" type="button" aria-pressed="false">Hide dots</button>
+        <input id="vSlider" type="range" min="0" max="100" value="0" aria-label="Open the machine doors and zoom in">
+      </div>
+    </section>
+
+    <div class="card specs mt-24">
+      <h3>Rigaku Ultima IV</h3>
+      <p>A high-performance, multipurpose powder X-ray diffractometer for phase identification, crystallinity, lattice parameter and crystallite size analysis of powders, bulk solids and thin films.</p>
+      <table>
+        <tbody>
+          <tr><th scope="row">Make / Model</th><td>Rigaku Ultima IV</td></tr>
+          <tr><th scope="row">X-ray Source</th><td>Cu K-alpha, λ = 1.5406 Å (sealed tube)</td></tr>
+          <tr><th scope="row">Generator Rating</th><td>Up to 40 kV / 30 mA (1.2 kW)</td></tr>
+          <tr><th scope="row">Geometry</th><td>Bragg-Brentano (θ/2θ), parallel beam optics for thin films</td></tr>
+          <tr><th scope="row">Goniometer</th><td>Theta–theta, vertical, wide-angle</td></tr>
+          <tr><th scope="row">Standard 2θ Range</th><td>5° – 90°</td></tr>
+          <tr><th scope="row">Detector</th><td>Scintillation counter / high-speed detector</td></tr>
+          <tr><th scope="row">Typical Scan Parameters</th><td>Step 0.02°, scan speed 10°/min</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="two-col">
+      <div class="card specs">
+        <h3>Powder Samples</h3>
+        <table><tbody>
+          <tr><th scope="row">Particle Size</th><td>Finely ground, ≤ 50 µm</td></tr>
+          <tr><th scope="row">Quantity</th><td>Minimum powder volume ~1.5 ml</td></tr>
+        </tbody></table>
+      </div>
+      <div class="card specs">
+        <h3>Solid / Film Samples</h3>
+        <table><tbody>
+          <tr><th scope="row">Dimensions</th><td>Up to 20 mm × 20 mm, thickness ≤ 5 mm</td></tr>
+          <tr><th scope="row">Surface</th><td>Flat and well polished</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">&copy; <span id="year"></span> Designed & Forged in 🔥 by Team META.</div>
+  </footer>
+  <script src="js/nav.js" defer></script>
+  <script src="js/viewer.js" defer></script>
+</body>
+</html>
