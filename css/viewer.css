@@ -1,0 +1,58 @@
+/* =====================================================================
+   INTERACTIVE 3D VIEWER — only loaded by instrument.html
+   (variables such as --gold and --navy come from styles.css)
+   ===================================================================== */
+
+/* ---------- Container, stage and perspective rig ---------- */
+.viewer { background: linear-gradient(180deg, #0b1220, #1e293b); border-radius: 16px; padding: 16px; color: #fff; }
+.v-stage { position: relative; width: 100%; aspect-ratio: 1 / 1; max-height: 78vh; margin: 0 auto; container-type: size; perspective: 1400px;
+  overflow: hidden; border-radius: 12px; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none;
+  background: radial-gradient(ellipse at 50% 85%, #334155 0%, #0f172a 70%); }
+.v-stage.grabbing { cursor: grabbing; }
+.v-rig { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .25s ease-out; }
+
+/* ---------- Image layers (one per view) and the moving light glare ---------- */
+.v-layer { position: absolute; inset: 0; display: grid; place-items: center; }
+.v-stage.moving .v-layer { will-change: transform, opacity; }
+.v-frame { position: relative; --r: 1; height: min(100cqh, calc(100cqw / var(--r))); aspect-ratio: var(--r); }
+.v-frame img { width: 100%; height: 100%; object-fit: contain; display: block; border-radius: 6px; box-shadow: 0 30px 60px rgba(0,0,0,.55); pointer-events: none; }
+.v-stage::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle at var(--sx, 50%) var(--sy, 30%), rgba(255,255,255,.16), transparent 45%); mix-blend-mode: soft-light; }
+
+/* ---------- Hotspot dots (big invisible touch area for fingers) ---------- */
+.v-spot { position: absolute; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; border: 1.5px solid #fff;
+  background: var(--gold); opacity: .85; cursor: pointer; padding: 0; transition: opacity .3s, transform .2s; z-index: 2; box-shadow: 0 0 0 1px rgba(0,0,0,.4); }
+.v-spot::before { content: ""; position: absolute; inset: -16px; }
+.v-spot:hover, .v-spot.on { background: #059669; transform: scale(1.25); }
+.v-stage.no-dots .v-spot, .v-stage.no-dots .v-arrows { visibility: hidden; }
+
+/* ---------- Arrows from dot to part (visible only on hover / tap) ---------- */
+.v-arrows { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; transition: opacity .3s; }
+.v-arrow { opacity: 0; transition: opacity .15s; }
+.v-arrow.on { opacity: 1; }
+.v-arrow .halo { stroke: rgba(15,23,42,.85); stroke-width: 4; stroke-linecap: round; fill: rgba(15,23,42,.85); stroke-linejoin: round; }
+.v-arrow .line { stroke: #fff; stroke-width: 1.8; stroke-linecap: round; }
+.v-arrow .head { fill: #fff; }
+.v-arrow.on .line { stroke: #fbbf24; stroke-width: 2.4; }
+.v-arrow.on .head { fill: #fbbf24; }
+
+/* ---------- Popup text, hint chip ---------- */
+.v-tip { position: absolute; z-index: 5; width: max-content; max-width: min(240px, 70%); pointer-events: none;
+  background: #fff; color: var(--navy); border-radius: 10px; padding: 8px 12px; font-size: .85rem; line-height: 1.35;
+  box-shadow: 0 8px 24px rgba(0,0,0,.4); opacity: 0; visibility: hidden; transition: opacity .15s; }
+.v-tip.show { opacity: 1; visibility: visible; }
+.v-tip strong { display: block; color: var(--gold); }
+.v-hint { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); background: rgba(15,23,42,.8); padding: 6px 14px;
+  border-radius: 999px; font-size: .8rem; pointer-events: none; transition: opacity .4s; text-align: center; max-width: 92%; z-index: 3; }
+
+/* ---------- Controls: view buttons and slider ---------- */
+.v-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 14px; }
+.v-controls input[type=range] { flex: 1 1 200px; accent-color: var(--gold); }
+.v-btn { font: inherit; font-weight: 600; font-size: .85rem; background: transparent; color: #fff; border: 1px solid #64748b; border-radius: 999px; padding: 8px 14px; min-height: 40px; cursor: pointer; }
+.v-btn.active { background: var(--gold); border-color: var(--gold); }
+.v-spot:focus-visible, .v-btn:focus-visible { outline: 3px solid #fbbf24; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .v-rig { transition: none; } }
+
+/* ---------- Responsive: shorter stage on phones held sideways, tighter padding on small phones ---------- */
+@media (max-height: 500px) and (orientation: landscape) { .v-stage { max-height: 92vh; } }
+@media (max-width: 480px) { .viewer { padding: 10px; } .v-hint { font-size: .72rem; } }

@@ -1,0 +1,179 @@
+/* =====================================================================
+   SITE STYLES — shared by every page.  (Viewer styles: css/viewer.css)
+   ===================================================================== */
+
+/* ---------- Design tokens (colours) ---------- */
+:root {
+  --navy: #0f172a; --navy2: #1e293b; --gold: #d97706; --bg: #f8fafc; --line: #e2e8f0; --muted: #64748b;
+  --ok: #059669; --fast: #d97706; --full: #dc2626;
+}
+
+/* ---------- Base / typography / utilities ---------- */
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Inter", system-ui, sans-serif; background: var(--bg); color: var(--navy); line-height: 1.55; }
+body.noscroll { overflow: hidden; }
+img { max-width: 100%; height: auto; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+h1, h2, h3 { margin: 0; line-height: 1.2; }
+h2 { font-size: 1.5rem; margin-bottom: 6px; }
+section { margin: 40px 0; }
+.muted { color: var(--muted); margin: 2px 0; }
+.small { font-size: .85rem; }
+code { background: #eef2f7; padding: 1px 6px; border-radius: 4px; font-size: .9em; }
+.mt-24 { margin-top: 24px; }
+.mt-36 { margin-top: 36px; }
+
+/* ---------- Header: logo, institute text, instrument status badge ---------- */
+.site-header { background: var(--navy); color: #fff; border-bottom: 4px solid var(--gold); }
+.header-inner { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; padding: 20px; }
+.brand { display: flex; gap: 16px; align-items: center; min-width: 0; }
+.logo { width: 64px; height: 64px; flex: none; object-fit: contain; background: #fff; border-radius: 10px; padding: 4px; }
+.site-header h1 { font-size: 1.5rem; }
+.dept { margin: 2px 0 0; color: #cbd5e1; }
+.facility { margin: 2px 0 0; color: #fbbf24; font-weight: 600; }
+.status-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(5,150,105,.18); border: 1px solid #10b981; color: #6ee7b7; padding: 6px 14px; border-radius: 999px; font-size: .85rem; font-weight: 600; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: currentColor; animation: pulse 2s infinite; }
+.status-pill.working { background: #059669; border-color: #059669; color: #fff; }
+.status-pill.maint { background: #facc15; border-color: #eab308; color: #422006; }
+.status-pill.unknown { background: #475569; border-color: #64748b; color: #fff; }
+@keyframes pulse { 50% { opacity: .35; } }
+
+/* ---------- Announcement ticker (pauses on hover) ---------- */
+.ticker { display: flex; background: var(--navy2); color: #fff; overflow: hidden; }
+.ticker-label { background: var(--gold); padding: 10px 16px; font-weight: 800; font-size: .8rem; letter-spacing: .08em; z-index: 1; }
+.ticker-viewport { overflow: hidden; flex: 1; display: flex; align-items: center; }
+.ticker-track { display: flex; white-space: nowrap; width: max-content; animation: scroll 30s linear infinite; }
+.ticker-track span { padding: 0 80px; }
+.ticker:hover .ticker-track { animation-play-state: paused; }
+@keyframes scroll { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } .dot { animation: none; } }
+
+/* ---------- Slot availability cards (home page) ---------- */
+.section-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: end; margin-bottom: 16px; }
+.refresh { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; font-size: .85rem; }
+.demo-note { background: #fef3c7; border: 1px solid #fcd34d; padding: 8px 14px; border-radius: 8px; font-size: .9rem; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px; }
+.card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 24px; box-shadow: 0 1px 3px rgba(15,23,42,.06); }
+.session { border-top: 5px solid var(--ok); }
+.session.fast { border-top-color: var(--fast); }
+.session.full { border-top-color: var(--full); }
+.card-top { display: flex; justify-content: space-between; gap: 10px; align-items: start; }
+.eyebrow { margin: 0 0 4px; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--gold); font-weight: 700; }
+.badge { padding: 4px 12px; border-radius: 999px; font-size: .8rem; font-weight: 700; color: #fff; white-space: nowrap; }
+.badge.ok { background: var(--ok); } .badge.fast { background: var(--fast); } .badge.full { background: var(--full); }
+.date { font-weight: 600; margin: 12px 0; }
+.metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0 0 16px; }
+.metrics div { background: var(--bg); border-radius: 10px; padding: 10px; text-align: center; }
+.metrics dt { font-size: .7rem; color: var(--muted); text-transform: uppercase; }
+.metrics dd { margin: 2px 0 0; font-size: 1.6rem; font-weight: 800; }
+.progress { height: 12px; background: var(--line); border-radius: 999px; overflow: hidden; }
+.bar { height: 100%; transition: width .6s; }
+.bar.ok { background: var(--ok); } .bar.fast { background: var(--fast); } .bar.full { background: var(--full); }
+.pct { font-size: .8rem; color: var(--muted); margin: 4px 0 12px; text-align: right; }
+.grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 6px; margin-bottom: 20px; }
+.cell { aspect-ratio: 1; border-radius: 6px; background: #d1fae5; border: 1px solid #6ee7b7; display: block; }
+.cell.booked { background: var(--navy); border-color: var(--navy); }
+.legend { display: flex; gap: 20px; margin-top: 14px; font-size: .85rem; color: var(--muted); }
+.legend span { display: flex; align-items: center; gap: 6px; }
+.legend .cell { width: 14px; display: inline-block; aspect-ratio: 1; }
+
+/* ---------- Buttons and focus outlines ---------- */
+.btn { font: inherit; font-weight: 700; border: 0; border-radius: 10px; padding: 12px 20px; cursor: pointer; background: var(--gold); color: #fff; transition: background .2s; }
+.btn:hover:not(:disabled) { background: #b45309; }
+.btn:disabled { background: #cbd5e1; color: #64748b; cursor: not-allowed; }
+.btn.secondary { background: #fff; color: var(--navy); border: 1px solid #cbd5e1; padding: 8px 14px; }
+.btn.secondary:hover:not(:disabled) { background: var(--line); }
+.book { width: 100%; }
+a:focus-visible, .btn:focus-visible, summary:focus-visible, input:focus-visible, .nav-toggle:focus-visible { outline: 3px solid #fbbf24; outline-offset: 2px; }
+
+/* ---------- Specification tables (stack on phones) ---------- */
+.specs table { width: 100%; border-collapse: collapse; }
+.specs th, .specs td { text-align: left; padding: 12px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.specs th { width: 32%; color: var(--navy2); }
+@media (max-width: 560px) { .specs th, .specs td { display: block; width: 100%; padding: 4px 0; } .specs th { padding-top: 12px; } }
+
+/* ---------- FAQ accordion ---------- */
+.faq details { background: #fff; border: 1px solid var(--line); border-radius: 10px; margin-bottom: 10px; padding: 0 18px; }
+.faq summary { cursor: pointer; font-weight: 600; padding: 14px 0; }
+.faq details[open] { border-left: 4px solid var(--gold); }
+.faq p { margin: 0 0 14px; color: #334155; }
+.faq h3.faq-group { margin: 28px 0 12px; }
+.faq ul { margin: 0 0 14px; padding-left: 20px; color: #334155; }
+
+/* ---------- Footer ---------- */
+.site-footer { background: var(--navy); color: #94a3b8; padding: 20px 0; text-align: center; font-size: .85rem; margin-top: 40px; }
+
+/* ---------- Pre-booking modal ---------- */
+.modal { position: fixed; inset: 0; background: rgba(15,23,42,.65); display: grid; place-items: center; padding: 16px; z-index: 50; }
+.modal[hidden] { display: none; }
+.modal-box { background: #fff; border-radius: 14px; padding: 28px; max-width: 520px; width: 100%; max-height: 90vh; overflow: auto; }
+.check { display: flex; gap: 12px; align-items: flex-start; padding: 12px; border: 1px solid var(--line); border-radius: 10px; margin-top: 12px; cursor: pointer; }
+.check input { margin-top: 4px; width: 18px; height: 18px; accent-color: var(--gold); flex: none; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 22px; flex-wrap: wrap; }
+
+/* ---------- Main navigation (sticky; becomes a dropdown on phones) ---------- */
+.nav { background: #fff; border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 40; }
+.nav-inner { display: flex; align-items: center; }
+.nav-links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px; }
+.nav-links a { display: block; padding: 14px; color: var(--navy); text-decoration: none; font-weight: 600; font-size: .92rem; border-bottom: 3px solid transparent; }
+.nav-links a:hover { color: var(--gold); }
+.nav-links a[aria-current="page"] { border-bottom-color: var(--gold); color: var(--gold); }
+.nav-toggle { display: none; font: inherit; font-weight: 700; background: none; border: 0; padding: 14px 0; cursor: pointer; color: var(--navy); }
+
+/* ---------- Content pages: titles, tables, notices, embeds, team ---------- */
+.page-title { margin: 32px 0 20px; }
+.page-title p { color: var(--muted); margin: 6px 0 0; }
+.table-wrap { overflow-x: auto; }
+.data-table { width: 100%; border-collapse: collapse; min-width: 420px; }
+.data-table th, .data-table td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--line); }
+.data-table thead th { background: var(--navy); color: #fff; }
+.price { font-weight: 800; color: var(--gold); white-space: nowrap; }
+.two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px; margin-top: 24px; }
+.notice { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 8px; padding: 10px 14px; font-size: .9rem; margin-top: 16px; }
+.embed iframe { width: 100%; height: 80vh; min-height: 520px; border: 0; border-radius: 10px; background: var(--bg); }
+.steps-card { margin-bottom: 24px; }
+.steps { list-style: none; counter-reset: step; margin: 16px 0 0; padding: 0; display: grid; gap: 16px; }
+.steps li { counter-increment: step; position: relative; padding: 4px 0 4px 52px; }
+.steps li::before { content: counter(step); position: absolute; left: 0; top: 2px; width: 36px; height: 36px; border-radius: 50%; background: var(--gold); color: #fff; font-weight: 800; display: grid; place-items: center; }
+.steps p { margin: 4px 0 10px; color: #334155; }
+.steps .btn { display: inline-block; text-decoration: none; }
+.embed h3 { margin-bottom: 12px; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+.people { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 24px; }
+.person { text-align: center; }
+.person img { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 4px solid var(--gold); background: var(--line); }
+.person h3 { margin-top: 14px; }
+.role { color: var(--gold); font-weight: 700; font-size: .85rem; text-transform: uppercase; letter-spacing: .05em; margin: 4px 0 10px; }
+.person p { margin: 4px 0; word-break: break-word; }
+
+/* ---------- Responsive breakpoints ---------- */
+/* Tablet (761–1024px): tighter spacing, smaller nav text so all links fit */
+@media (min-width: 761px) and (max-width: 1024px) {
+  .container { padding: 0 16px; }
+  .nav-links a { padding: 12px 10px; font-size: .88rem; }
+  .card { padding: 20px; }
+  .metrics dd { font-size: 1.4rem; }
+}
+/* Phone (≤760px): collapsible menu, stacked header */
+@media (max-width: 760px) {
+  .nav-inner { flex-direction: column; align-items: stretch; }
+  .nav-toggle { display: block; text-align: left; min-height: 44px; }
+  .nav-links { display: none; flex-direction: column; padding-bottom: 8px; }
+  .nav-links.open { display: flex; }
+  .nav-links a { border-bottom: 0; border-left: 3px solid transparent; padding: 12px; }
+  .nav-links a[aria-current="page"] { border-left-color: var(--gold); }
+  .header-inner { padding: 16px; }
+  .site-header h1 { font-size: 1.25rem; }
+  .status-pill { font-size: .8rem; }
+  .ticker-label { padding: 10px 10px; font-size: .7rem; }
+}
+/* Small phones: smaller logo, compact cards, shorter embed */
+@media (max-width: 480px) {
+  .logo { width: 52px; height: 52px; }
+  .card { padding: 16px; }
+  .metrics dd { font-size: 1.3rem; }
+  .grid { grid-template-columns: repeat(8, 1fr); }
+  .embed iframe { min-height: 440px; height: 75vh; }
+  .section-head { align-items: start; }
+}
