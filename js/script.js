@@ -182,7 +182,7 @@ function computeStatus(booked, override) {
   return { key: "ok", label: "Available", closed: false };
 }
 
-// Draws one session card (date, metrics, progress bar, 24-cell grid, Book button)
+// Draws one session card (date, booked/available totals, circular progress, Book button)
 function renderCard(el, data, title) {
   const max = CONFIG.MAX_SAMPLES_PER_WEEK;
   const booked = Math.max(0, Math.min(max, parseInt(data.Samples_Booked, 10) || 0));
@@ -190,8 +190,8 @@ function renderCard(el, data, title) {
   const remaining = max - booked;
   const pct = st.unavailable ? 0 : Math.round((booked / max) * 100);
   const shown = (n) => (st.unavailable ? "—" : n);
-  const cells = Array.from({ length: max }, (_, i) =>
-    `<span class="cell ${!st.unavailable && i < booked ? "booked" : ""}" title="Slot ${i + 1}"></span>`).join("");
+  const circumference = 2 * Math.PI * 42;
+  const dashOffset = circumference * (1 - pct / 100);
   const btnText = st.unavailable ? "Booking Info Unavailable"
     : st.closed ? (st.label === "Maintenance" ? "Session Unavailable" : `Session Full (${max}/${max} Booked)`)
     : "Book Now";
@@ -202,16 +202,22 @@ function renderCard(el, data, title) {
       <span class="badge ${st.key}">${esc(st.label)}</span>
     </div>
     <p class="date">📅 ${esc(formatDate(data.Session_Date))}</p>
-    <dl class="metrics">
-      <div><dt>Total Slots</dt><dd>${max}</dd></div>
-      <div><dt>Samples Booked</dt><dd>${shown(booked)}</dd></div>
-      <div><dt>Remaining Slots</dt><dd>${shown(remaining)}</dd></div>
-    </dl>
-    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="${max}" aria-valuenow="${st.unavailable ? 0 : booked}">
-      <div class="bar ${st.key}" style="width:${pct}%"></div>
+    <div class="capacity">
+      <div class="capacity-ring ${st.key}" role="progressbar"
+           aria-label="${st.unavailable ? "Availability unavailable" : `${booked} samples booked; ${remaining} slots available`}"
+           aria-valuemin="0" aria-valuemax="${max}" aria-valuenow="${st.unavailable ? 0 : booked}">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="ring-track" cx="50" cy="50" r="42"></circle>
+          <circle class="ring-value" cx="50" cy="50" r="42"
+                  style="stroke-dasharray:${circumference};stroke-dashoffset:${dashOffset}"></circle>
+        </svg>
+        <span class="ring-label"><strong>${st.unavailable ? "—" : pct + "%"}</strong><small>${st.unavailable ? "unavailable" : "booked"}</small></span>
+      </div>
+      <dl class="capacity-stats">
+        <div><dt>Samples booked</dt><dd>${shown(booked)}</dd></div>
+        <div><dt>Slots available</dt><dd>${shown(remaining)}</dd></div>
+      </dl>
     </div>
-    <p class="pct">${st.unavailable ? "No data" : pct + "% filled"}</p>
-    <div class="grid" aria-hidden="true">${cells}</div>
     <button class="btn book" ${st.closed ? "disabled" : ""}>${esc(btnText)}</button>`;
   if (!st.closed) el.querySelector(".book").addEventListener("click", openModal);
 }
