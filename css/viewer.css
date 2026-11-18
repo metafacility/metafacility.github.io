@@ -7,17 +7,18 @@
 .viewer { background: linear-gradient(180deg, #0b1220, #1e293b); border-radius: 16px; padding: 16px; color: #fff; }
 .v-stage { position: relative; width: 100%; aspect-ratio: 1 / 1; max-height: 78vh; margin: 0 auto; container-type: size; perspective: 1400px;
   overflow: hidden; border-radius: 12px; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none;
-  background: radial-gradient(ellipse at 50% 85%, #334155 0%, #0f172a 70%); }
+  background: #e7ecf2; }
 .v-stage.grabbing { cursor: grabbing; }
 .v-rig { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .25s ease-out; }
 
 /* ---------- Image layers (one per view) and the moving light glare ---------- */
 .v-layer { position: absolute; inset: 0; display: grid; place-items: center; }
+.v-layer:nth-child(1) { background: #e7ecf2; }
+.v-layer:nth-child(2) { background: #e9eef4; }
+.v-layer:nth-child(3) { background: #e2e9f1; }
 .v-stage.moving .v-layer { will-change: transform, opacity; }
 .v-frame { position: relative; --r: 1; height: min(100cqh, calc(100cqw / var(--r))); aspect-ratio: var(--r); }
-.v-frame img { width: 100%; height: 100%; object-fit: contain; display: block; border-radius: 6px; box-shadow: 0 30px 60px rgba(0,0,0,.55); pointer-events: none; }
-.v-stage::after { content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(circle at var(--sx, 50%) var(--sy, 30%), rgba(255,255,255,.16), transparent 45%); mix-blend-mode: soft-light; }
+.v-frame img { width: 100%; height: 100%; object-fit: contain; display: block; pointer-events: none; }
 
 /* ---------- Hotspot dots (big invisible touch area for fingers) ---------- */
 .v-spot { position: absolute; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; border: 1.5px solid #fff;
