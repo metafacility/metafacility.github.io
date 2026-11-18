@@ -37,6 +37,17 @@
     </div>
   </header>
 
+  <!-- ANNOUNCEMENT TICKER: text comes from the Alert_Message column (the 2nd span is a copy for a seamless loop) -->
+  <div class="ticker" role="region" aria-label="Announcements">
+    <span class="ticker-label">Announcements📢</span>
+    <div class="ticker-viewport">
+      <div class="ticker-track">
+        <span id="tickerText"></span>
+        <span id="tickerText2" aria-hidden="true"></span>
+      </div>
+    </div>
+  </div>
+  
   <!-- NAVIGATION -->
   <nav class="nav" aria-label="Main">
     <div class="container nav-inner">
@@ -51,17 +62,6 @@
       </ul>
     </div>
   </nav>
-
-  <!-- ANNOUNCEMENT TICKER: text comes from the Alert_Message column (the 2nd span is a copy for a seamless loop) -->
-  <div class="ticker" role="region" aria-label="Announcements">
-    <span class="ticker-label">Announcements📢</span>
-    <div class="ticker-viewport">
-      <div class="ticker-track">
-        <span id="tickerText"></span>
-        <span id="tickerText2" aria-hidden="true"></span>
-      </div>
-    </div>
-  </div>
 
   <!-- MAIN CONTENT -->
   <main class="container">
