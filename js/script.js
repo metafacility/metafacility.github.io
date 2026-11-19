@@ -298,8 +298,9 @@ const action = isCurrent
       </dl>
     </div>
      ${action}`;
-  if (isCurrent && !st.closed) {
+     if (isCurrent && !st.closed) {
     el.querySelector(".book").addEventListener("click", openModal);
+  }
 }
 
 // Updates the header badge: green = Working, yellow = maintenance/other text, grey = unknown
