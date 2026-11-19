@@ -57,19 +57,44 @@
       <h2>Usage Charges</h2>
     </div>
 
-    <div class="card">
-      <div class="table-wrap">
-        <table class="data-table charges-table">
-          <thead><tr><th>User Category</th><th>Charge per Sample</th></tr></thead>
-          <tbody>
-            <tr><td>Institute students</td><td class="price">₹ 300</td></tr>
-            <tr><td>External academia</td><td class="price">₹ 600</td></tr>
-            <tr><td>Industries</td><td class="price">₹ 1,200</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="muted small">Charges are per sample for the standard scan rate.</p>
-    </div>
+    <section class="pricing-grid" aria-label="Usage charges per sample">
+      <article class="pricing-card">
+        <span class="pricing-tag internal">Institute</span>
+        <svg class="pricing-icon" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M5 18 24 7l19 11-19 11L5 18Z" fill="#dbeafe" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M13 24v9c6 5 16 5 22 0v-9M42 19v12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="42" cy="34" r="2.5" fill="#d97706"/>
+        </svg>
+        <h3>Institute students</h3>
+        <p class="pricing-amount"><span class="currency">₹</span><strong>300</strong><span class="per-sample">/sample</span></p>
+        <p class="pricing-description">For students and researchers affiliated with NIT Tiruchirappalli.</p>
+      </article>
+
+      <article class="pricing-card pricing-card-featured">
+        <span class="pricing-tag academic">Academic</span>
+        <svg class="pricing-icon" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M7 40V19L24 8l17 11v21H7Z" fill="#e0e7ff" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M18 40V27h12v13M12 22h4m16 0h4M22 18h4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M21 13h6" stroke="#d97706" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <h3>External academia</h3>
+        <p class="pricing-amount"><span class="currency">₹</span><strong>600</strong><span class="per-sample">/sample</span></p>
+        <p class="pricing-description">For researchers from other universities and academic institutions.</p>
+      </article>
+
+      <article class="pricing-card">
+        <span class="pricing-tag industry">Industry</span>
+        <svg class="pricing-icon" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M6 41V22l13 8V21l13 9V16l10 6v19H6Z" fill="#fef3c7" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M11 36h4m5 0h4m5 0h4m5 0h2M32 16V8h6v11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M36 5c3 2 4 4 3 6" fill="none" stroke="#d97706" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <h3>Industries</h3>
+        <p class="pricing-amount"><span class="currency">₹</span><strong>1,200</strong><span class="per-sample">/sample</span></p>
+        <p class="pricing-description">For industry partners and non-academic organizations.</p>
+      </article>
+    </section>
+    <p class="muted small pricing-note">Charges are per sample for the standard scan rate.</p>
 
      <div class="two-col" id="payment">
       <div class="card specs">
