@@ -59,7 +59,7 @@
     </div>
 
     <!-- PROCEDURE: 4 steps the user must follow -->
-    <section class="card steps-card" aria-labelledby="stepsHeading">
+    <section class="card steps-card" aria-label="Steps to request results">
       <ol class="steps">
         <li>
           <strong>Pay the XRD charges</strong>
@@ -68,13 +68,11 @@
         </li>
         <li>
           <strong>Upload the payment screenshot</strong>
-          <p>Upload the screenshot of your payment, showing the <b>transaction reference number</b>, to our OneDrive folder.</p>
-          <a class="btn" href="https://nitturl-my.sharepoint.com/:f:/g/personal/azhagappan_nitt_edu/IgCjslqXygepTZ8LbLfc4RPRAbyJ5yFpFSvl2lmyi-E6l1M" target="_blank" rel="noopener noreferrer">Upload screenshot to OneDrive ↗</a>
+          <p>Submit a screenshot showing the <b>transaction reference number</b> using the upload form on the next page.</p>
         </li>
         <li>
           <strong>Fill in the transaction details</strong>
-          <p>Complete the Microsoft Form below with your transaction details.</p>
-          <a class="btn secondary" href="#txnForm">Go to the form ↓</a>
+          <p>Submit the Microsoft Form with your transaction details after uploading your screenshot.</p>
         </li>
         <li>
           <strong>Receive your results by e-mail</strong>
@@ -82,34 +80,26 @@
         </li>
       </ol>
       <p class="notice">⏳ Didn't receive your results within one working day? Contact the instrument operator at <b>azhagappan@nitt.edu</b>.</p>
+      <div class="flow-actions flow-actions-end">
+        <button class="btn" id="startResults" type="button">Proceed to Request Results</button>
+      </div>
     </section>
-
-    <!-- STEP 3 FORM: Microsoft Form for transaction details -->
-    <div class="card embed" id="txnForm">
-      <h3>Fill in the transaction details</h3>
-      <a class="btn secondary form-direct" href="https://forms.cloud.microsoft/r/tu2kG27AsG" target="_blank" rel="noopener noreferrer">Open form full screen ↗</a>
-      <!-- Replace the src below with your Microsoft Form's embed URL (Share > Embed) -->
-      <iframe
-        src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=p1CEoozbM0yRKkQzEbIt24HXgw1mc2dHkZ3KvmFTnWJUQzRLRjNVOTdNMzNFUEhDMjIwOTBKN0MyMy4u&amp;embed=true"
-        width="100%" height="1800"
-  frameborder="0" 
-  marginwidth="0" 
-  marginheight="0" 
-  title="Transaction details form" loading="lazy"
-  style="border:none; max-width:100%;"
-  allowfullscreen
-  webkitallowfullscreen 
-  mozallowfullscreen 
-  msallowfullscreen>
-</iframe>
-      <p class="muted small">If the embedded form is small or does not load, use the full-screen link above.</p>
-    </div> 
   </main>
+
+  <dialog class="modal-box flow-dialog" id="paymentDialog" aria-labelledby="paymentTitle">
+    <h3 id="paymentTitle">Have you paid the charges to the institute account?</h3>
+    <div class="modal-actions">
+      <a class="btn secondary" href="charges.html#payment">No, view account details</a>
+      <a class="btn" href="upload.html">Yes, proceed to upload</a>
+    </div>
+    <form method="dialog"><button class="dialog-close" type="submit">Cancel</button></form>
+  </dialog>
 
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container">&copy; <span id="year"></span> Designed & Forged in 🔥 by Team META.</div>
   </footer>
   <script src="js/nav.js" defer></script>
+  <script src="js/results-flow.js" defer></script>
 </body>
 </html>
