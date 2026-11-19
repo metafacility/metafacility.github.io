@@ -42,13 +42,18 @@ code { background: #eef2f7; padding: 1px 6px; border-radius: 4px; font-size: .9e
 
 /* ---------- Announcement ticker (pauses on hover) ---------- */
 .ticker { display: flex; background: var(--navy2); color: #fff; overflow: hidden; }
-.ticker-label { background: var(--gold); padding: 10px 16px; font-weight: 800; font-size: .8rem; letter-spacing: .08em; z-index: 1; }
-.ticker-viewport { overflow: hidden; flex: 1; display: flex; align-items: center; }
-.ticker-track { display: flex; white-space: nowrap; width: max-content; animation: scroll 20s linear infinite; }
-.ticker-track span { padding: 0 80px; }
-.ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker-label { background: #334155; padding: 10px 16px; font-weight: 800; font-size: .8rem; letter-spacing: .08em; z-index: 1; }
+.ticker-viewport { overflow: hidden; flex: 1; min-width: 0; display: flex; align-items: center; }
+.ticker-track { display: flex; flex: none; white-space: nowrap; width: max-content; animation: scroll 20s linear infinite; }
+.ticker-track span { flex: none; padding: 0 80px; }
+@media (hover: hover) { .ticker:hover .ticker-track { animation-play-state: paused; } }
 @keyframes scroll { to { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } .dot { animation: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; width: 100%; white-space: normal; }
+  .ticker-track span { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; padding: 8px 12px; }
+  .ticker-track span[aria-hidden="true"] { display: none; }
+  .dot { animation: none; }
+}
 
 /* ---------- Slot availability cards (home page) ---------- */
 .section-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: end; margin-bottom: 16px; }
@@ -133,12 +138,14 @@ a:focus-visible, .btn:focus-visible, summary:focus-visible, input:focus-visible,
 .data-table thead th { background: var(--navy); color: #fff; }
 .data-table thead th:first-child { border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
 .data-table thead th:last-child { border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
-.price { font-weight: 800; color: var(--gold); white-space: nowrap; }
+.data-table th:last-child, .data-table td.price { text-align: right; }
+.price { font-weight: 800; font-variant-numeric: tabular-nums; color: var(--gold); white-space: nowrap; }
 .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px; margin-top: 24px; }
 .notice { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 8px; padding: 10px 14px; font-size: .9rem; margin-top: 16px; }
 .embed iframe { width: 100%; height: 80vh; min-height: 520px; border: 0; border-radius: 10px; background: var(--bg); }
 #txnForm iframe { display: block; height: 1800px; min-height: 1800px; }
 #bookingForm iframe { display: block; height: 2600px; min-height: 2600px; }
+#uploadForm iframe { display: block; height: 900px; min-height: 900px; }
 #txnForm .form-direct { display: inline-block; margin-bottom: 12px; text-decoration: none; }
 .steps-card { margin-bottom: 24px; }
 .steps { list-style: none; counter-reset: step; margin: 16px 0 0; padding: 0; display: grid; gap: 16px; }
@@ -175,6 +182,8 @@ html { scroll-behavior: smooth; }
 }
 /* Phone (≤760px): collapsible menu, stacked header */
 @media (max-width: 760px) {
+  .data-table { min-width: 0; table-layout: fixed; }
+  .data-table th, .data-table td { padding: 10px 6px; overflow-wrap: anywhere; }
   .nav-inner { flex-direction: column; align-items: stretch; }
   .nav-toggle { display: block; align-self: flex-end; text-align: right; min-height: 44px; }
   .nav-links { display: none; flex-direction: column; align-items: stretch; align-self: stretch; padding-bottom: 8px; }
@@ -185,10 +194,12 @@ html { scroll-behavior: smooth; }
   .site-header h1 { font-size: 1.25rem; }
   .status-pill { font-size: .8rem; }
   .ticker-label { padding: 10px 10px; font-size: .7rem; }
+  .ticker-track { font-size: .85rem; }
   #txnForm iframe { height: 2200px; min-height: 2200px; }
   #txnForm { padding-left: 8px; padding-right: 8px; }
   #bookingForm iframe { height: 3200px; min-height: 3200px; }
   #bookingForm { padding-left: 8px; padding-right: 8px; }
+  #uploadForm iframe { height: 1100px; min-height: 1100px; }
 }
 /* Small phones: smaller logo, compact cards, shorter embed */
 @media (max-width: 480px) {
