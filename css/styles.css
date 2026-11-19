@@ -138,6 +138,7 @@ a:focus-visible, .btn:focus-visible, summary:focus-visible, input:focus-visible,
 .notice { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 8px; padding: 10px 14px; font-size: .9rem; margin-top: 16px; }
 .embed iframe { width: 100%; height: 80vh; min-height: 520px; border: 0; border-radius: 10px; background: var(--bg); }
 #txnForm iframe { display: block; height: 1800px; min-height: 1800px; }
+#bookingForm iframe { display: block; height: 1800px; min-height: 1800px; }
 #txnForm .form-direct { display: inline-block; margin-bottom: 12px; text-decoration: none; }
 .steps-card { margin-bottom: 24px; }
 .steps { list-style: none; counter-reset: step; margin: 16px 0 0; padding: 0; display: grid; gap: 16px; }
@@ -177,6 +178,7 @@ html { scroll-behavior: smooth; }
   .status-pill { font-size: .8rem; }
   .ticker-label { padding: 10px 10px; font-size: .7rem; }
   #txnForm iframe { height: 2200px; min-height: 2200px; }
+  #bookingForm iframe { height: 2200px; min-height: 2200px; }
   #txnForm { padding-left: 8px; padding-right: 8px; }
 }
 /* Small phones: smaller logo, compact cards, shorter embed */
