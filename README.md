@@ -10,12 +10,14 @@ A static, multipage website for an X-ray Diffraction facility, built with plain 
 ├─ instrument.html     Instrument Specifications + interactive 3D viewer
 ├─ charges.html        Usage Charges (tariff, bank / UPI details)
 ├─ faq.html            FAQ
-├─ results.html        Results & Receipts (Microsoft Form iframe)
+├─ results.html        Results request instructions and payment confirmation
+├─ upload.html         Zoho payment screenshot upload form
+├─ forms.html          Microsoft transaction details form
 ├─ contact.html        Contact + team photos
 ├─ 404.html            "Page not found" page
 ├─ robots.txt, .nojekyll, .gitignore
 ├─ css/   styles.css (all pages) · viewer.css (instrument page only)
-├─ js/    script.js (home page) · viewer.js (3D viewer) · nav.js (menu + year)
+├─ js/    script.js (home page) · viewer.js (3D viewer) · nav.js (menu + year) · results-flow.js (results dialogs)
 ├─ assets/img/   logo.png · favicon.svg · photo1.jpg · photo2.jpg · machine-1/2/3.jpg
 └─ source-images/  original large photos (NOT uploaded; listed in .gitignore)
 ```
@@ -32,11 +34,14 @@ A static, multipage website for an X-ray Diffraction facility, built with plain 
 | Fallback data when the sheet fails | `js/script.js` `MOCK_DATA` (line 26) |
 | Team photos | Replace `assets/img/photo1.jpg` and `photo2.jpg` (square, same names) |
 | Bank / UPI / tariff | `charges.html` |
-| Results & Receipts form | `results.html` — replace the iframe `src` (Share > Embed) |
+| Payment screenshot form | `upload.html` — replace the Zoho iframe `src` and fallback link; update `frame-src` if the hostname changes |
+| Results transaction form | `forms.html` — replace the Microsoft iframe `src` and full-screen link (Share > Embed) |
 | Contact details, team names | `contact.html` |
 | Viewer dots and popup text | `js/viewer.js` `VIEWS` list (`x,y` = dot, `tx,ty` = part, in % of the image) |
 
-The header and menu are repeated in each HTML file, so change them in all 6 files.
+The header and menu are repeated in each HTML file, so change them on every page.
+
+The results request flow starts at `results.html`, then goes through `upload.html` and `forms.html`. These two pages are not in the navigation menu but are publicly accessible. Users must submit both embedded forms before finishing; the website cannot verify cross-origin submissions.
 
 ## Google Sheet setup (live slots, ticker and status badge)
 
@@ -62,6 +67,6 @@ If the sheet cannot be loaded the cards show "Unavailable" and a yellow note exp
 
 ## Security notes
 
-- Each page has a Content-Security-Policy `<meta>` tag. If you embed another service (for example a different form host), add its domain to `frame-src` (in `results.html`) or `connect-src` (in `index.html`).
+- Each page has a Content-Security-Policy `<meta>` tag. If you embed another form host, add its domain to `frame-src` on the page containing that iframe; data sources may require changes to `connect-src` in `index.html`.
 - Never put passwords or private keys in these files; everything is public.
 - Only publish bank/UPI details you intend to be public.
