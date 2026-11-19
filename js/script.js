@@ -145,6 +145,22 @@ async function loadData() {
   let rows;
   try {
     rows = await fetchSheetData();
+    if (rows.length < 3) {
+  throw new Error("The sheet must contain three session rows.");
+}
+
+const secondOpening = parseOpeningTime(rows[1].Booking_Opens_At);
+const thirdOpening = parseOpeningTime(rows[2].Booking_Opens_At);
+
+if (!secondOpening || !thirdOpening) {
+  throw new Error(
+    "Rows 2 and 3 need valid Booking_Opens_At values: YYYY-MM-DD HH:mm in IST."
+  );
+}
+
+if (thirdOpening.timestamp <= secondOpening.timestamp) {
+  throw new Error("The third session must open after the second session.");
+} 
     state.demo = false;
     state.error = "";
   } catch (err) {
@@ -153,7 +169,7 @@ async function loadData() {
     rows = CONFIG.MOCK_DATA;
     state.demo = true;
   }
-  state.weeks = rows.slice(0, 2);
+  state.weeks = rows.slice(0, 3);
   const alertRow = rows.find((r) => (r.Alert_Message || "").trim());
   state.alert = alertRow ? alertRow.Alert_Message.trim() : CONFIG.FALLBACK_ALERT_TEXT;
   const statusRow = state.demo ? null : rows.find((r) => (r.Instrument_Status || "").trim());
@@ -163,6 +179,60 @@ async function loadData() {
   btn.disabled = false;
   btn.textContent = "↻ Refresh Availability";
 }
+
+// Reads a plain-text YYYY-MM-DD HH:mm value as India Standard Time.
+function parseOpeningTime(value) {
+  const match = String(value || "").trim().match(
+    /^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})$/
+  );
+
+  if (!match) return null;
+
+  const [, yearText, monthText, dayText, hourText, minuteText] = match;
+  const year = Number(yearText);
+  const month = Number(monthText);
+  const day = Number(dayText);
+  const hour = Number(hourText);
+  const minute = Number(minuteText);
+
+  if (year < 2000 || hour > 23 || minute > 59) return null;
+
+  const utc = Date.UTC(year, month - 1, day, hour, minute);
+  const check = new Date(utc);
+
+  if (
+    check.getUTCFullYear() !== year ||
+    check.getUTCMonth() !== month - 1 ||
+    check.getUTCDate() !== day ||
+    check.getUTCHours() !== hour ||
+    check.getUTCMinutes() !== minute
+  ) {
+    return null;
+  }
+
+  const pad = (number) => String(number).padStart(2, "0");
+  const period = hour >= 12 ? "pm" : "am";
+  const hour12 = hour % 12 || 12;
+
+  return {
+    timestamp: utc - 330 * 60 * 1000,
+    label: `${pad(day)}-${pad(month)}-${year} at ${pad(hour12)}:${pad(minute)} ${period} IST`
+  };
+}
+
+// The first sheet row is current until a later session's opening time.
+function currentWeekIndex() {
+  let index = 0;
+
+  for (let i = 1; i < state.weeks.length; i++) {
+    const opening = parseOpeningTime(state.weeks[i].Booking_Opens_At);
+    if (opening && Date.now() >= opening.timestamp) index = i;
+  }
+
+  return index;
+}
+
+let activeWeekIndex = 0;
 
 /* ---------- Rendering ---------- */
 // Turns "2026-11-04" into a long, readable date
@@ -183,7 +253,7 @@ function computeStatus(booked, override) {
 }
 
 // Draws one session card (date, booked/available totals, circular progress, Book button)
-function renderCard(el, data, title) {
+function renderCard(el, data, title, isCurrent) {
   const max = CONFIG.MAX_SAMPLES_PER_WEEK;
   const booked = Math.max(0, Math.min(max, parseInt(data.Samples_Booked, 10) || 0));
   const st = computeStatus(booked, data.Status_Override);
@@ -195,6 +265,15 @@ function renderCard(el, data, title) {
   const btnText = st.unavailable ? "Booking Info Unavailable"
     : st.closed ? (st.label === "Maintenance" ? "Session Unavailable" : `Session Full (${max}/${max} Booked)`)
     : "Book Now";
+   const opening = isCurrent ? null : parseOpeningTime(data.Booking_Opens_At);
+
+const action = isCurrent
+  ? `<button class="btn book" ${st.closed ? "disabled" : ""}>${esc(btnText)}</button>`
+  : `<p class="notice">${
+      opening
+        ? `Booking for this session opens on ${esc(opening.label)}.`
+        : "Booking opening time is unavailable."
+    }</p>`;
   el.className = `card session ${st.key}`;
   el.innerHTML = `
     <div class="card-top">
@@ -218,8 +297,9 @@ function renderCard(el, data, title) {
         <div><dt>Slots available</dt><dd>${shown(remaining)}</dd></div>
       </dl>
     </div>
-    <button class="btn book" ${st.closed ? "disabled" : ""}>${esc(btnText)}</button>`;
-  if (!st.closed) el.querySelector(".book").addEventListener("click", openModal);
+     ${action}`;
+  if (isCurrent && !st.closed) {
+    el.querySelector(".book").addEventListener("click", openModal);
 }
 
 // Updates the header badge: green = Working, yellow = maintenance/other text, grey = unknown
@@ -238,8 +318,26 @@ function renderStatus() {
 // Redraws every dynamic part of the page
 function render() {
   renderStatus();
-  renderCard($("card1"), state.weeks[0] || CONFIG.MOCK_DATA[0], "Current / Upcoming Week Session");
-  renderCard($("card2"), state.weeks[1] || CONFIG.MOCK_DATA[1], "Next Week Session");
+const index = state.demo ? 0 : currentWeekIndex();
+
+if (index !== activeWeekIndex && !$("modal").hidden) {
+  closeModal();
+}
+activeWeekIndex = index;
+
+renderCard(
+  $("card1"),
+  state.weeks[index] || CONFIG.MOCK_DATA[0],
+  "Current / Upcoming Week Session",
+  true
+);
+
+renderCard(
+  $("card2"),
+  state.weeks[index + 1] || CONFIG.MOCK_DATA[1],
+  "Next Week Session",
+  false
+);
   $("tickerText").textContent = state.alert;
   $("tickerText2").textContent = state.alert;
   $("lastUpdated").textContent = "Last updated: " + state.updated.toLocaleString();
@@ -272,10 +370,7 @@ function initModal() {
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("modal").hidden) closeModal(); });
   $("proceedBtn").addEventListener("click", () => {
     if (![...checks].every((x) => x.checked)) return;
-    const url = safeUrl(CONFIG.MS_FORM_URL);
-    if (!url) { alert("Booking form URL is missing or not https://. Set CONFIG.MS_FORM_URL in js/script.js."); return; }
-    window.open(url, "_blank", "noopener,noreferrer");
-    closeModal();
+    window.location.href = "booking.html";
   });
 }
 
@@ -284,4 +379,14 @@ document.addEventListener("DOMContentLoaded", () => {
   initModal();
   $("refreshBtn").addEventListener("click", loadData);
   loadData();
+   // Check whether the next session has reached its opening time.
+setInterval(() => {
+  if (
+    !state.demo &&
+    state.weeks.length >= 3 &&
+    currentWeekIndex() !== activeWeekIndex
+  ) {
+    render();
+  }
+}, 10000);
 });
