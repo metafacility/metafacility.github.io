@@ -149,7 +149,7 @@ a:focus-visible, .btn:focus-visible, summary:focus-visible, input:focus-visible,
 .embed iframe { width: 100%; height: 80vh; min-height: 520px; border: 0; border-radius: 10px; background: var(--bg); }
 #txnForm iframe { display: block; height: 1800px; min-height: 1800px; }
 #bookingForm iframe { display: block; height: 2300px; min-height: 2300px; }
-#uploadForm iframe { display: block; height: 600px; min-height: 600px; }
+#uploadForm iframe { display: block; height: 650px; min-height: 650px; }
 #txnForm .form-direct { display: inline-block; margin-bottom: 12px; text-decoration: none; }
 .steps-card { margin-bottom: 24px; }
 .steps { list-style: none; counter-reset: step; margin: 16px 0 0; padding: 0; display: grid; gap: 16px; }
@@ -202,9 +202,9 @@ html { scroll-behavior: smooth; }
   .ticker-track { font-size: .85rem; }
   #txnForm iframe { height: 1700px; min-height: 1700px; }
   #txnForm { padding-left: 8px; padding-right: 8px; }
-  #bookingForm iframe { height: 2300px; min-height: 2300px; }
+  #bookingForm iframe { height: 2250px; min-height: 2250px; }
   #bookingForm { padding-left: 8px; padding-right: 8px; }
-  #uploadForm iframe { height: 750px; min-height: 750px; }
+  #uploadForm iframe { height: 800px; min-height: 800px; }
 }
 /* Small phones: smaller logo, compact cards, shorter embed */
 @media (max-width: 480px) {
