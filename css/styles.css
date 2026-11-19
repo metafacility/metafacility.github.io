@@ -178,8 +178,9 @@ html { scroll-behavior: smooth; }
   .status-pill { font-size: .8rem; }
   .ticker-label { padding: 10px 10px; font-size: .7rem; }
   #txnForm iframe { height: 2200px; min-height: 2200px; }
-  #bookingForm iframe { height: 3200px; min-height: 3200px; }
   #txnForm { padding-left: 8px; padding-right: 8px; }
+  #bookingForm iframe { height: 3200px; min-height: 3200px; }
+  #bookingForm { padding-left: 8px; padding-right: 8px; }
 }
 /* Small phones: smaller logo, compact cards, shorter embed */
 @media (max-width: 480px) {
