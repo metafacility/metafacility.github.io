@@ -140,12 +140,16 @@ a:focus-visible, .btn:focus-visible, summary:focus-visible, input:focus-visible,
 .data-table thead th:last-child { border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
 .data-table th:last-child, .data-table td.price { text-align: right; }
 .price { font-weight: 800; font-variant-numeric: tabular-nums; color: var(--gold); white-space: nowrap; }
+.charges-table { min-width: 0; table-layout: fixed; }
+.charges-table th, .charges-table td { padding: 12px 16px; }
+.charges-table th:first-child, .charges-table td:first-child { width: 68%; }
+.charges-table th:last-child, .charges-table td:last-child { width: 32%; }
 .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px; margin-top: 24px; }
 .notice { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 8px; padding: 10px 14px; font-size: .9rem; margin-top: 16px; }
 .embed iframe { width: 100%; height: 80vh; min-height: 520px; border: 0; border-radius: 10px; background: var(--bg); }
 #txnForm iframe { display: block; height: 1800px; min-height: 1800px; }
-#bookingForm iframe { display: block; height: 2600px; min-height: 2600px; }
-#uploadForm iframe { display: block; height: 900px; min-height: 900px; }
+#bookingForm iframe { display: block; height: 2400px; min-height: 2400px; }
+#uploadForm iframe { display: block; height: 450px; min-height: 450px; }
 #txnForm .form-direct { display: inline-block; margin-bottom: 12px; text-decoration: none; }
 .steps-card { margin-bottom: 24px; }
 .steps { list-style: none; counter-reset: step; margin: 16px 0 0; padding: 0; display: grid; gap: 16px; }
@@ -184,6 +188,7 @@ html { scroll-behavior: smooth; }
 @media (max-width: 760px) {
   .data-table { min-width: 0; table-layout: fixed; }
   .data-table th, .data-table td { padding: 10px 6px; overflow-wrap: anywhere; }
+  .charges-table th, .charges-table td { padding: 10px 12px; }
   .nav-inner { flex-direction: column; align-items: stretch; }
   .nav-toggle { display: block; align-self: flex-end; text-align: right; min-height: 44px; }
   .nav-links { display: none; flex-direction: column; align-items: stretch; align-self: stretch; padding-bottom: 8px; }
@@ -195,11 +200,11 @@ html { scroll-behavior: smooth; }
   .status-pill { font-size: .8rem; }
   .ticker-label { padding: 10px 10px; font-size: .7rem; }
   .ticker-track { font-size: .85rem; }
-  #txnForm iframe { height: 2200px; min-height: 2200px; }
+  #txnForm iframe { height: 1800px; min-height: 1800px; }
   #txnForm { padding-left: 8px; padding-right: 8px; }
-  #bookingForm iframe { height: 3200px; min-height: 3200px; }
+  #bookingForm iframe { height: 2600px; min-height: 2600px; }
   #bookingForm { padding-left: 8px; padding-right: 8px; }
-  #uploadForm iframe { height: 1100px; min-height: 1100px; }
+  #uploadForm iframe { height: 550px; min-height: 550px; }
 }
 /* Small phones: smaller logo, compact cards, shorter embed */
 @media (max-width: 480px) {
