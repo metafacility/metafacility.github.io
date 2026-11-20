@@ -58,25 +58,24 @@
       <p>Follow the procedure below to receive your results.</p>
     </div>
 
-    <!-- PROCEDURE: 4 steps the user must follow -->
+    <!-- PROCEDURE: 3 steps the user must follow -->
     <section class="card steps-card" aria-label="Steps to request results">
       <ol class="steps">
         <li>
-          <strong>Pay the XRD charges</strong>
-          <p>Pay the usage charges to the institute account.</p>
-          <a class="btn secondary" href="charges.html#payment">View institute account details →</a>
+          <div class="step-content">
+            <strong>Pay the usage charges to the<a href="charges.html#payment"> institute account number</a>.</strong>
+          </div>
         </li>
         <li>
-          <strong>Upload the payment screenshot</strong>
-          <p>Submit a screenshot showing the <b>transaction reference number</b> using the upload form on the next page.</p>
+          <div class="step-content">
+            <strong>Upload the payment screenshot and fill in the transaction details in the <a id="startResultsLink" href="#startResults">Proceed to Request Results</a> page</strong>
+          </div>
         </li>
         <li>
-          <strong>Fill in the transaction details</strong>
-          <p>Submit the Microsoft Form with your transaction details after uploading your screenshot.</p>
-        </li>
-        <li>
-          <strong>Receive your results by e-mail</strong>
-          <p>After the operator verifies your payment, the results will be e-mailed to the webmail ID used to book the XRD slot within one working day.</p>
+          <div class="step-content">
+            <strong>Receive your results by e-mail</strong>
+            <p>After the operator verifies your payment, the results will be e-mailed to the webmail ID used to book the XRD slot within one working day.</p>
+          </div>
         </li>
       </ol>
       <p class="notice">⏳ Didn't receive your results within one working day? Contact the instrument operator at <b>azhagappan@nitt.edu</b>.</p>
@@ -90,9 +89,9 @@
     <h3 id="paymentTitle">Have you paid the charges to the institute account?</h3>
     <div class="modal-actions">
       <a class="btn secondary" href="charges.html#payment">No, view account details</a>
-      <a class="btn" href="upload.html">Yes, proceed to upload</a>
+      <a class="btn" href="upload.html">Yes, Proceed to Request Results</a>
     </div>
-    <form method="dialog"><button class="dialog-close" type="submit">Cancel</button></form>
+    <form class="payment-cancel" method="dialog"><button class="dialog-close" type="submit">Cancel</button></form>
   </dialog>
 
   <!-- FOOTER -->
