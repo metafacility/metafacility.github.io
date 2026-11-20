@@ -45,17 +45,15 @@
 
   <main class="container">
     <div class="page-title">
-      <h2>Transaction Details</h2>
-      <p>Step 2 of 2: Submit the form with your transaction details.</p>
+      <h2>Step 2 of 2: Fill Transaction Details</h2>
+      <p> Submit the form with your transaction details.</p>
     </div>
     <div class="card embed" id="txnForm">
-      <h3>Fill in the transaction details</h3>
-      <a class="btn secondary form-direct" href="https://forms.cloud.microsoft/r/tu2kG27AsG" target="_blank" rel="noopener noreferrer">Open form full screen ↗</a>
       <!-- Replace the iframe URL with your Microsoft Form's embed URL if the form changes. -->
       <iframe
         src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=p1CEoozbM0yRKkQzEbIt24HXgw1mc2dHkZ3KvmFTnWJUQzRLRjNVOTdNMzNFUEhDMjIwOTBKN0MyMy4u&amp;embed=true"
         title="Transaction details form" loading="lazy" allowfullscreen></iframe>
-      <p class="muted small">Submit this form before selecting Finish. If it is small or does not load, use the full-screen link above.</p>
+      <p class="muted small">If the embedded form does not load, <a href="https://forms.cloud.microsoft/r/tu2kG27AsG" target="_blank" rel="noopener noreferrer">open the microsoft form in a new tab↗</a>.</p>
       <div class="flow-actions">
         <a class="btn secondary" href="upload.html">Go Back</a>
         <button class="btn" id="finishResults" type="button">Finish</button>
@@ -65,7 +63,7 @@
 
   <dialog class="modal-box flow-dialog" id="finishDialog" aria-labelledby="finishTitle" aria-describedby="finishMessage">
     <h3 id="finishTitle">Before you finish</h3>
-    <p>Please make sure you have submitted both the payment screenshot and the transaction details forms. This website cannot verify their submission.</p>
+    <p>Please make sure you have submitted the correct and valid payment screenshot, transaction details in this forms.</p>
     <p id="finishMessage">The results will be emailed post verification of the submitted details within one working day.</p>
     <div class="modal-actions">
       <form method="dialog"><button class="btn secondary" type="submit">Go back</button></form>
